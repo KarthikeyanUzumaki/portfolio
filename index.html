@@ -3,9 +3,1352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karthik</title>
+    <title>Karthik | Freelance Web Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .enhanced-result {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .enhanced-result .original,
+    .enhanced-result .enhanced {
+        padding: 1rem;
+    }
+    
+    .enhanced-result .original {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .enhanced-result .enhanced {
+        background-color: #f0f7ff;
+    }
+    
+    .enhanced-result h4 {
+        margin-top: 0;
+        color: var(--primary);
+    }
+    
+    .error {
+        color: #dc3545;
+    }
+        /* Global Styles */
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4d44db;
+            --dark: #2f2e41;
+            --light: #f8f9fa;
+            --accent: #ff6584;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 0 10%;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 70vmax;
+            height: 70vmax;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, rgba(108, 99, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding: 2rem 0;
+        }
+        
+        .hero-content h4 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .hero-content h1 span {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .hero-content h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: rgba(108, 99, 255, 0.3);
+            z-index: -1;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-links a {
+            color: var(--dark);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .tech-stack {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .tech-stack img {
+            height: 30px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-stack img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 10%;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #777;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .contact-card i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background-color: rgba(108, 99, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p, .contact-card a {
+            color: #777;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary);
+        }
+
+        .contact-form {
+            background-color: var(--light);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .ai-enhancer {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #777;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ai-enhancer:hover {
+            color: var(--primary);
+        }
+
+        .ai-enhancer i {
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 10%;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-social a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* AI Enhancer Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .ai-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-option {
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ai-option:hover {
+            background-color: rgba(108, 99, 255, 0.1);
+        }
+
+        .ai-option i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-option h4 {
+            font-size: 1rem;
+        }
+
+        .ai-result {
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            min-height: 100px;
+        }
+
+        .ai-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .login-subtitle {
+            color: #777;
+            margin-bottom: 2rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .login-input {
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .login-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+
+        .login-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                padding-top: 5rem;
+                text-align: center;
+            }
+            
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tech-stack {
+                position: relative;
+                margin-top: 2rem;
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content h4 {
+                font-size: 1.2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .ai-options {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Karthik</a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h4>Hello, I'm</h4>
+            <h1>Karthik <span>Freelance Web Developer</span></h1>
+            <p>I craft exceptional digital experiences that help businesses grow. With 5+ years of experience in web development, I specialize in creating responsive, user-friendly websites and web applications.</p>
+            
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Hire Me
+                </a>
+                <a href="#projects" class="btn btn-outline">
+                    <i class="fas fa-eye"></i> View Work
+                </a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Karthik - Web Developer">
+            
+            <div class="tech-stack">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+            <p>Have a project in mind or want to discuss potential opportunities? Feel free to reach out!</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h3>Email</h3>
+                        <a href="mailto:karthik@example.com">karthik@example.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h3>Phone</h3>
+                        <a href="tel:+919876543210">+91 98765 43210</a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Bangalore, India</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                        <div class="ai-enhancer" id="openEnhancer">
+                            <i class="fas fa-magic"></i>
+                            <span>Enhance with AI</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="footer-logo">Karthik</a>
+            
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            
+            <div class="footer-social">
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            
+            <p class="copyright">© 2023 Karthik. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- AI Enhancer Modal -->
+    <div class="modal" id="aiEnhancerModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeEnhancer">&times;</span>
+            <h3 class="modal-title">AI Content Enhancer</h3>
+            
+            <div class="ai-options">
+                <div class="ai-option" data-type="professional">
+                    <i class="fas fa-suitcase"></i>
+                    <h4>Professional</h4>
+                </div>
+                <div class="ai-option" data-type="friendly">
+                    <i class="fas fa-smile"></i>
+                    <h4>Friendly</h4>
+                </div>
+                <div class="ai-option" data-type="concise">
+                    <i class="fas fa-align-left"></i>
+                    <h4>Concise</h4>
+                </div>
+                <div class="ai-option" data-type="persuasive">
+                    <i class="fas fa-bullhorn"></i>
+                    <h4>Persuasive</h4>
+                </div>
+            </div>
+            
+            <div class="ai-result" id="aiResult">
+                <p>Your enhanced content will appear here...</p>
+            </div>
+            
+            <div class="ai-actions">
+                <button class="btn btn-outline" id="cancelEnhance">
+                    Cancel
+                </button>
+                <button class="btn btn-primary" id="applyEnhance">
+                    Apply Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <span class="login-close" id="closeLogin">&times;</span>
+            <h2 class="login-title">Welcome to My Portfolio</h2>
+            <p class="login-subtitle">Please sign in with your Google account to continue</p>
+            
+            <form class="login-form" id="loginForm">
+                <input type="email" class="login-input" placeholder="Enter your Gmail address" required>
+                <button type="submit" class="login-btn">Continue with Google</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // AI Enhancer Modal
+        const openEnhancer = document.getElementById('openEnhancer');
+        const closeEnhancer = document.getElementById('closeEnhancer');
+        const cancelEnhance = document.getElementById('cancelEnhance');
+        const aiEnhancerModal = document.getElementById('aiEnhancerModal');
+        const aiOptions = document.querySelectorAll('.ai-option');
+        const aiResult = document.getElementById('aiResult');
+        const applyEnhance = document.getElementById('applyEnhance');
+        const messageTextarea = document.getElementById('message');
+
+        openEnhancer.addEventListener('click', () => {
+            aiEnhancerModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeEnhancer.addEventListener('click', () => {
+            aiEnhancerModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        cancelEnhance.addEventListener('click', () => {
+            aiEnhancerModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === aiEnhancerModal) {
+                aiEnhancerModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // AI Enhancement Functionality
+        aiOptions.forEach(option => {
+            option.addEventListener('click', async () => {
+                const enhancementType = option.getAttribute('data-type');
+                const originalText = messageTextarea.value;
+                
+                if (!originalText.trim()) {
+                    aiResult.innerHTML = '<p>Please write some text in the message field first.</p>';
+                    return;
+                }
+                
+                // Show loading state
+                aiResult.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Enhancing your message...</p>';
+                
+                try {
+                    // Call the DeepSeek API
+                    const enhancedText = await callDeepSeekAPI(originalText, enhancementType);
+                    aiResult.innerHTML = `<p>${enhancedText}</p>`;
+                } catch (error) {
+                    aiResult.innerHTML = `<p>Error: Could not enhance content. Please try again.</p>`;
+                    console.error('AI Enhancement Error:', error);
+                }
+            });
+        });
+
+        async function callDeepSeekAPI(text, style) {
+        const DEEPSEEK_API_KEY = 'sk-ce0df***********************c4a5'; // Your API key
+        const apiUrl = 'https://api.deepseek.com/v1/enhance'; // API endpoint
+        
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
+                },
+                body: JSON.stringify({
+                    text: text,
+                    style: style,
+                    instructions: `Please correct all grammatical errors and enhance this message to make it more ${style}. 
+                    Focus on:
+                    1. Fixing all grammar, punctuation, and spelling mistakes
+                    2. Improving sentence structure and clarity
+                    3. Maintaining the original intent and meaning
+                    4. Making the tone appropriate for ${style} communication
+                    5. Ensuring proper flow and readability
+                    
+                    Return only the enhanced text without additional commentary.`
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Return the enhanced text if available, otherwise return original with basic fixes
+            return data.enhanced_text || grammarFix(text);
+        } catch (error) {
+            console.error('DeepSeek API Error:', error);
+            // Enhanced fallback with better grammar correction
+            return advancedGrammarFix(text, style);
+        }
+    }
+
+    // Advanced grammar correction fallback
+    function advancedGrammarFix(text, style) {
+        if (!text.trim()) return text;
+        
+        // Basic grammar fixes
+        let corrected = text
+            // Fix common contractions
+            .replace(/\b(cant)\b/gi, "can't")
+            .replace(/\b(wont)\b/gi, "won't")
+            .replace(/\b(im)\b/gi, "I'm")
+            // Fix common punctuation
+            .replace(/([a-z])\.([A-Z])/g, '$1. $2')
+            .replace(/([^.!?])\s*$/g, '$1.')
+            // Fix capitalization at start
+            .replace(/^([a-z])/, (m) => m.toUpperCase())
+            // Fix spacing
+            .replace(/\s+/g, ' ')
+            .replace(/([,.!?])([A-Za-z])/g, '$1 $2');
+        
+        // Style-specific enhancements
+        switch(style) {
+            case 'professional':
+                corrected = corrected.replace(/\b(hi|hey)\b/gi, "Dear");
+                corrected = corrected.replace(/\b(thanks|thank you)\b/gi, "Thank you");
+                corrected = `Dear Recipient,\n\n${corrected}\n\nBest regards,\nKarthik`;
+                break;
+            case 'friendly':
+                corrected = corrected.replace(/Dear/g, "Hi");
+                corrected = `Hi there!\n\n${corrected}\n\nCheers,\nKarthik`;
+                break;
+            case 'concise':
+                corrected = corrected
+                    .replace(/\bvery\b/gi, '')
+                    .replace(/\breally\b/gi, '')
+                    .replace(/\bquite\b/gi, '')
+                    .replace(/\bsomewhat\b/gi, '');
+                break;
+            case 'persuasive':
+                corrected = corrected
+                    .replace(/\bI think\b/gi, "I'm confident")
+                    .replace(/\bmaybe\b/gi, "I recommend")
+                    .replace(/\bperhaps\b/gi, "I suggest");
+                corrected = `${corrected}\n\nI believe this would be an excellent opportunity for us to collaborate.`;
+                break;
+        }
+        
+        return corrected;
+    }
+
+    // Simple grammar fixes for fallback
+    function grammarFix(text) {
+        return text
+            .replace(/\bi\b/g, 'I') // Capitalize I
+            .replace(/\b([a-z])\./g, (m) => m.toUpperCase()) // Capitalize after periods
+            .replace(/\b(its|it's)\b/gi, (m) => m === 'its' ? "it's" : m) // Fix its/it's
+            .replace(/\b(your|you're)\b/gi, (m) => m === 'your' ? "you're" : m) // Fix your/you're
+            .replace(/\b(their|they're|there)\b/gi, (m) => {
+                if (m === 'their') return "they're";
+                if (m === 'theyre') return "they're";
+                return m;
+            });
+    }
+
+        
+        // Apply enhanced text
+        applyEnhance.addEventListener('click', () => {
+            const enhancedText = aiResult.querySelector('p').textContent;
+            messageTextarea.value = enhancedText;
+            aiEnhancerModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        async function callDeepSeekAPI(text, style) {
+        const DEEPSEEK_API_KEY = 'sk-ce0df***********************c4a5'; // Your API key
+        const apiUrl = 'https://api.deepseek.com/v1/complete'; // Using completions endpoint for better results
+        
+        try {
+            const prompt = `Please correct and enhance the following message to make it grammatically perfect and more ${style}. 
+            Focus on:
+            1. Fixing all grammar, spelling, and punctuation errors
+            2. Improving sentence structure and clarity
+            3. Maintaining the original meaning
+            4. Making it sound professional and polished
+            
+            Original message: "${text}"
+            
+            Enhanced ${style} version:`;
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: "deepseek-grammar-1.0",
+                    prompt: prompt,
+                    max_tokens: 500,
+                    temperature: 0.3,
+                    top_p: 0.9
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}`);
+            }
+            
+            const data = await response.json();
+            return data.choices[0].text.trim();
+            
+        } catch (error) {
+            console.error('DeepSeek API Error:', error);
+            // Use advanced local grammar correction as fallback
+            return enhanceTextLocally(text, style);
+        }
+    }
+
+    // Robust local grammar correction and enhancement
+    function enhanceTextLocally(text, style) {
+        if (!text.trim()) return text;
+        
+        // Basic grammar fixes
+        let enhanced = text
+            // Fix common grammar mistakes
+            .replace(/\bi\b/g, 'I')
+            .replace(/\b(cant|wont|dont)\b/gi, (m) => {
+                const map = {cant: "can't", wont: "won't", dont: "don't"};
+                return map[m.toLowerCase()] || m;
+            })
+            // Fix punctuation
+            .replace(/([^.!?])\s*$/g, '$1.')
+            .replace(/([a-z])([A-Z])/g, '$1. $2')
+            // Fix spacing
+            .replace(/\s+/g, ' ')
+            .replace(/([,.!?])([A-Za-z])/g, '$1 $2')
+            // Capitalize first letter
+            .replace(/^([a-z])/, (m) => m.toUpperCase());
+        
+        // Style-specific enhancements
+        switch(style) {
+            case 'professional':
+                enhanced = enhanced
+                    .replace(/\b(hi|hey|hello)\b/gi, "Dear")
+                    .replace(/\b(pls|please)\b/gi, "kindly")
+                    .replace(/\b(thanks|thank you)\b/gi, "Thank you");
+                enhanced = `Dear Recipient,\n\n${enhanced}\n\nBest regards,\nKarthik`;
+                break;
+                
+            case 'friendly':
+                enhanced = enhanced
+                    .replace(/\bDear\b/gi, "Hi")
+                    .replace(/\bkindly\b/gi, "please")
+                    .replace(/\bhowever\b/gi, "but");
+                enhanced = `Hi there!\n\n${enhanced}\n\nCheers,\nKarthik`;
+                break;
+                
+            case 'concise':
+                enhanced = enhanced
+                    .replace(/\bvery\b/gi, '')
+                    .replace(/\breally\b/gi, '')
+                    .replace(/\bquite\b/gi, '')
+                    .replace(/\bin order to\b/gi, 'to')
+                    .replace(/\bdue to the fact that\b/gi, 'because');
+                break;
+                
+            case 'persuasive':
+                enhanced = enhanced
+                    .replace(/\bI think\b/gi, "I'm confident")
+                    .replace(/\bmaybe\b/gi, "I recommend")
+                    .replace(/\bperhaps\b/gi, "I suggest")
+                    .replace(/\bgood\b/gi, "exceptional")
+                    .replace(/\bnice\b/gi, "impressive");
+                enhanced = `${enhanced}\n\nI believe this collaboration would be mutually beneficial.`;
+                break;
+        }
+        
+        // Advanced sentence structure improvements
+        enhanced = enhanced.replace(/\. ([a-z])/g, (match) => {
+            return '. ' + match.charAt(2).toUpperCase() + match.slice(3);
+        });
+        
+        return enhanced;
+    }
+
+    // Example usage with the enhanced system
+    aiOptions.forEach(option => {
+        option.addEventListener('click', async () => {
+            const enhancementType = option.getAttribute('data-type');
+            const originalText = messageTextarea.value;
+            
+            if (!originalText.trim()) {
+                aiResult.innerHTML = '<p>Please write a message to enhance.</p>';
+                return;
+            }
+            
+            aiResult.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Analyzing and enhancing your message...</p>';
+            
+            try {
+                const enhancedText = await callDeepSeekAPI(originalText, enhancementType);
+                aiResult.innerHTML = `
+                    <div class="enhanced-result">
+                        <div class="original">
+                            <h4>Original:</h4>
+                            <p>${originalText}</p>
+                        </div>
+                        <div class="enhanced">
+                            <h4>Enhanced (${enhancementType}):</h4>
+                            <p>${enhancedText}</p>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                aiResult.innerHTML = `
+                    <p class="error">Enhancement failed. Using local correction instead.</p>
+                    <p>${enhanceTextLocally(originalText, enhancementType)}</p>
+                `;
+            }
+        });
+    });
+
+        // DeepSeek API function
+        async function callDeepSeekAPI(text, style) {
+            const DEEPSEEK_API_KEY = 'sk-ce0df***********************c4a5'; // Your API key
+            const apiUrl = 'https://api.deepseek.com/v3/enhance'; // API endpoint
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        style: style,
+                        instructions: `Enhance this message to make it more ${style} while keeping the original meaning and context. Focus on improving clarity, tone, and professionalism.`
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Return the enhanced text if available, otherwise return original
+                return data.enhanced_text || text;
+            } catch (error) {
+                console.error('DeepSeek API Error:', error);
+                // Fallback to a simple enhancement if API fails
+                return simpleEnhancement(text, style);
+            }
+        }
+
+        // Simple fallback enhancement
+        function simpleEnhancement(text, style) {
+            if (!text.trim()) return text;
+            
+            const sentences = text.split('. ').filter(s => s.trim().length > 0);
+            
+            if (sentences.length === 0) return text;
+            
+            switch(style) {
+                case 'professional':
+                    return `Dear Recipient,\n\n${sentences[0].trim()}.\n\n${sentences.slice(1).join('. ')}.\n\nBest regards,\nKarthik`;
+                case 'friendly':
+                    return `Hi there!\n\n${sentences[0].trim()}!\n\n${sentences.slice(1).join('. ')}.\n\nCheers,\nKarthik`;
+                case 'concise':
+                    return sentences.map(s => s.split(' ').slice(0, 10).join(' ')).join('. ') + '.';
+                case 'persuasive':
+                    return `I'm excited to share that ${sentences[0].toLowerCase()}.\n\n${sentences.slice(1).join('. ')}.\n\nLet's discuss how we can work together!`;
+                default:
+                    return text;
+            }
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 992) {
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Login Modal
+        const loginModal = document.getElementById('loginModal');
+        const closeLogin = document.getElementById('closeLogin');
+        const loginForm = document.getElementById('loginForm');
+
+        // Show login modal after 3 seconds
+        setTimeout(() => {
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }, 3000);
+
+        closeLogin.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value;
+            
+            if (email && email.includes('@gmail.com')) {
+                alert(`Thank you for signing in with ${email}`);
+                loginModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            } else {
+                alert('Please enter a valid Gmail address');
+            }
+        });
+        
+    </script>
     
 </body>
 </html>
